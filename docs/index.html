@@ -1,0 +1,110 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>snake-venom</title><meta name="description" content="Documentation for snake-venom"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">snake-venom</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> snake-venom </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h1>Overview</h1>
+</a>
+<img src="https://pasteimg.com/images/2022/05/13/snake.th.png" alt="snake-venom" border="0" />
+
+<p><code>snake-venom</code> is a web tracing library based on opentelemetry.</p>
+
+<a href="#available-features" id="available-features" style="color: inherit; text-decoration: none;">
+  <h2>Available Features</h2>
+</a>
+<ul>
+<li>DocumentLoadInstrumentation</li>
+<li>UserInteractionInstrumentation</li>
+<li>FetchInstrumentation</li>
+<li>XMLHttpRequestInstrumentation</li>
+<li>Error Logging</li>
+<li>ErrorTraceWrapper for functions</li>
+<li>Report Custom Exceptions</li>
+</ul>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">  npm install snake-venom</span>
+</code></pre>
+
+<a href="#usageexamples" id="usageexamples" style="color: inherit; text-decoration: none;">
+  <h2>Usage/Examples</h2>
+</a>
+
+<a href="#instantiate-automatic-app-wide-instrumentation" id="instantiate-automatic-app-wide-instrumentation" style="color: inherit; text-decoration: none;">
+  <h3>Instantiate Automatic App wide Instrumentation</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">initializeTracing</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;snake-venom&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// see project docs for more on Config</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">config</span><span class="hl-0">: </span><span class="hl-7">Config</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-2">service:</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-2">name:</span><span class="hl-0"> </span><span class="hl-3">&quot;my-sample-service&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">  </span><span class="hl-4">// snake-venom will logs/traces to this url</span><br/><span class="hl-0">  </span><span class="hl-4">// if configured, else nothing will be sent</span><br/><span class="hl-0">  </span><span class="hl-2">exporterUrl:</span><span class="hl-0"> </span><span class="hl-3">&quot;https://your-exporter-url&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-4">// this can be called without a config as well</span><br/><span class="hl-4">// if you aren&#39;t ready yet using just</span><br/><span class="hl-4">// initializeTracing()</span><br/><span class="hl-8">initializeTracing</span><span class="hl-0">(</span><span class="hl-2">config</span><span class="hl-0">);</span>
+</code></pre>
+
+<a href="#error-tracing-hook" id="error-tracing-hook" style="color: inherit; text-decoration: none;">
+  <h3>Error Tracing Hook</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">useErrorTraceWrapper</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;snake-venom&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-8">myFunc</span><span class="hl-0"> = () </span><span class="hl-5">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-8">alert</span><span class="hl-0">(</span><span class="hl-3">&quot;hi&quot;</span><span class="hl-0">);</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-4">// wraps the function in a try catch with</span><br/><span class="hl-4">// tracing and error reporting</span><br/><span class="hl-8">useErrorTraceWrapper</span><span class="hl-0">(</span><span class="hl-2">myFunc</span><span class="hl-0">);</span>
+</code></pre>
+
+<a href="#error-logging" id="error-logging" style="color: inherit; text-decoration: none;">
+  <h3>Error Logging</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">reportError</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;snake-venom&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-1">try</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-8">doWork</span><span class="hl-0">();</span><br/><span class="hl-0">} </span><span class="hl-1">catch</span><span class="hl-0"> (</span><span class="hl-2">ex</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-8">reportError</span><span class="hl-0">(</span><span class="hl-2">ex</span><span class="hl-0">);</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#custom-instrument-a-function" id="custom-instrument-a-function" style="color: inherit; text-decoration: none;">
+  <h3>Custom Instrument a function</h3>
+</a>
+<p>Imagine you have an automated kitchen, and you want to time how long the robot chef takes to bake a cake. The naive way to do this would be to just start a span, call your method, then end the span:</p>
+<pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">createTracer</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;snake-venom&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// Acquire a tracer</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">tracer</span><span class="hl-0"> = </span><span class="hl-8">createTracer</span><span class="hl-0">(</span><span class="hl-3">&quot;my-custom-tracer&quot;</span><span class="hl-0">);</span><br/><br/><span class="hl-4">// start a span using the acquried tracer</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">cakeSpan</span><span class="hl-0"> = </span><span class="hl-2">tracer</span><span class="hl-0">.</span><span class="hl-8">startSpan</span><span class="hl-0">(</span><span class="hl-3">&quot;bake-cake-span&quot;</span><span class="hl-0">);</span><br/><span class="hl-4">// +</span><br/><span class="hl-4">// everything that happens from span start ... [1]</span><br/><span class="hl-4">// +</span><br/><span class="hl-2">chef</span><span class="hl-0">.</span><span class="hl-8">bakeCake</span><span class="hl-0">();</span><br/><span class="hl-4">// +</span><br/><span class="hl-4">// [1] ... to span end, gets instrumented</span><br/><span class="hl-4">// +</span><br/><span class="hl-4">// end the span</span><br/><span class="hl-2">cakeSpan</span><span class="hl-0">.</span><span class="hl-8">end</span><span class="hl-0">();</span>
+</code></pre>
+
+<a href="#custom-instrument-an-async-function" id="custom-instrument-an-async-function" style="color: inherit; text-decoration: none;">
+  <h3>Custom Instrument an async function</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">SpanStatusCode</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;@opentelemetry/api&quot;</span><span class="hl-0">;</span><br/><span class="hl-1">import</span><span class="hl-0"> { </span><span class="hl-2">getErrorTracer</span><span class="hl-0"> } </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&quot;snake-venom&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-4">// Acquire a tracer</span><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">tracer</span><span class="hl-0"> = </span><span class="hl-8">getErrorTracer</span><span class="hl-0">();</span><br/><br/><span class="hl-1">export</span><span class="hl-0"> </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-8">wrapper</span><span class="hl-0"> = () </span><span class="hl-5">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-4">// start a new span, provide your own custom span name</span><br/><span class="hl-0">  </span><span class="hl-2">tracer</span><span class="hl-0">.</span><span class="hl-8">startActiveSpan</span><span class="hl-0">(</span><span class="hl-3">&quot;custom-span-name&quot;</span><span class="hl-0">, </span><span class="hl-5">async</span><span class="hl-0"> (</span><span class="hl-2">span</span><span class="hl-0">) </span><span class="hl-5">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-1">try</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-4">// doAnyWork()</span><br/><span class="hl-0">      </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-8">fetch</span><span class="hl-0">(</span><span class="hl-3">&quot;http://example.com/movies.json&quot;</span><span class="hl-0">);</span><br/><span class="hl-0">      </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">setStatus</span><span class="hl-0">({ </span><span class="hl-2">code:</span><span class="hl-0"> </span><span class="hl-2">SpanStatusCode</span><span class="hl-0">.</span><span class="hl-6">OK</span><span class="hl-0"> });</span><br/><span class="hl-0">    } </span><span class="hl-1">catch</span><span class="hl-0"> (</span><span class="hl-2">err</span><span class="hl-0">) {</span><br/><span class="hl-0">      </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">recordException</span><span class="hl-0">(</span><span class="hl-2">err</span><span class="hl-0">);</span><br/><span class="hl-0">      </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">setStatus</span><span class="hl-0">({</span><br/><span class="hl-0">        </span><span class="hl-2">code:</span><span class="hl-0"> </span><span class="hl-2">SpanStatusCode</span><span class="hl-0">.</span><span class="hl-6">ERROR</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-2">message:</span><span class="hl-0"> </span><span class="hl-2">err</span><span class="hl-0">.</span><span class="hl-2">message</span><span class="hl-0">,</span><br/><span class="hl-0">      });</span><br/><span class="hl-0">      </span><span class="hl-1">throw</span><span class="hl-0"> </span><span class="hl-2">err</span><span class="hl-0">;</span><br/><span class="hl-0">    } </span><span class="hl-1">finally</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">end</span><span class="hl-0">();</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">  });</span><br/><span class="hl-0">};</span>
+</code></pre>
+
+<a href="#custom-events" id="custom-events" style="color: inherit; text-decoration: none;">
+  <h3>Custom Events</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;Doing something&quot;</span><span class="hl-0">);</span><br/><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">result</span><span class="hl-0"> = </span><span class="hl-8">doWork</span><span class="hl-0">();</span><br/><br/><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;Did something&quot;</span><span class="hl-0">);</span>
+</code></pre>
+
+<a href="#breadcrumb-events" id="breadcrumb-events" style="color: inherit; text-decoration: none;">
+  <h3>Breadcrumb Events</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-1">try</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-8">doWork1</span><span class="hl-0">();</span><br/><span class="hl-0">  </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;checkpoint 1&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-3">&quot;some key&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;some info&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  });</span><br/><span class="hl-0">  </span><span class="hl-8">doWork2</span><span class="hl-0">();</span><br/><span class="hl-0">  </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;checkpoint 2&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-3">&quot;some key&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;some info&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  });</span><br/><span class="hl-0">  </span><span class="hl-8">doWork3</span><span class="hl-0">();</span><br/><span class="hl-0">  </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;checkpoint 3&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-3">&quot;some key&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;some info&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  });</span><br/><span class="hl-0">} </span><span class="hl-1">catch</span><span class="hl-0"> (</span><span class="hl-2">ex</span><span class="hl-0">) {</span><br/><span class="hl-0">  </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">recordException</span><span class="hl-0">(</span><span class="hl-2">ex</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">setStatus</span><span class="hl-0">({ </span><span class="hl-2">code:</span><span class="hl-0"> </span><span class="hl-2">otel</span><span class="hl-0">.</span><span class="hl-2">SpanStatusCode</span><span class="hl-0">.</span><span class="hl-6">ERROR</span><span class="hl-0"> });</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#custom-logs" id="custom-logs" style="color: inherit; text-decoration: none;">
+  <h3>Custom Logs</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-2">span</span><span class="hl-0">.</span><span class="hl-8">addEvent</span><span class="hl-0">(</span><span class="hl-3">&quot;log&quot;</span><span class="hl-0">, {</span><br/><span class="hl-0">  </span><span class="hl-3">&quot;log.severity&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;error&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-3">&quot;log.message&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;User not found&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-3">&quot;enduser.id&quot;</span><span class="hl-2">:</span><span class="hl-0"> </span><span class="hl-3">&quot;123&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
+</code></pre>
+
+<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
+  <h2>Demo</h2>
+</a>
+<p><img src="https://github.com/open-telemetry/opentelemetry-js/raw/main/examples/tracer-web/images/xml-http-request.png" alt="alt text"></p>
+
+<a href="#run-locally" id="run-locally" style="color: inherit; text-decoration: none;">
+  <h2>Run Locally</h2>
+</a>
+<p>Install dependencies</p>
+<pre><code class="language-bash"><span class="hl-0">  npm install</span>
+</code></pre>
+<p>Dev build</p>
+<pre><code class="language-bash"><span class="hl-0">  npm run dev</span>
+</code></pre>
+<p>Prod build</p>
+<pre><code class="language-bash"><span class="hl-0">  npm run build</span>
+</code></pre>
+
+<a href="#references" id="references" style="color: inherit; text-decoration: none;">
+  <h2>References</h2>
+</a>
+<ul>
+<li>Usage Docs 1: <a href="https://opentelemetry.uptrace.dev/guide/js-tracing.html#opentelemetry-js">https://opentelemetry.uptrace.dev/guide/js-tracing.html#opentelemetry-js</a></li>
+<li>Usage Docs 2: <a href="https://opentelemetry.lightstep.com/js/">https://opentelemetry.lightstep.com/js/</a></li>
+<li>Opentelemetry Api Docs: <a href="https://opentelemetry.io/docs/instrumentation/js/">https://opentelemetry.io/docs/instrumentation/js/</a></li>
+<li>SDK: <a href="https://github.com/open-telemetry/opentelemetry-js">https://github.com/open-telemetry/opentelemetry-js</a></li>
+<li>Examples: <a href="https://github.com/open-telemetry/opentelemetry-js/tree/main/examples/tracer-web/examples">https://github.com/open-telemetry/opentelemetry-js/tree/main/examples/tracer-web/examples</a></li>
+<li>Exception/Error Handling Docs: <a href="https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/semantic_conventions/exceptions.md">https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/semantic_conventions/exceptions.md</a></li>
+</ul>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/hooks_errorTraceWrapper.html">hooks/error<wbr/>Trace<wbr/>Wrapper</a></li><li class=" tsd-kind-module"><a href="modules/hooks_initializeTracing.html">hooks/initialize<wbr/>Tracing</a></li><li class=" tsd-kind-module"><a href="modules/hooks_recordException.html">hooks/record<wbr/>Exception</a></li><li class=" tsd-kind-module"><a href="modules/processors.html">processors</a></li><li class=" tsd-kind-module"><a href="modules/types.html">types</a></li><li class=" tsd-kind-module"><a href="modules/utils_constants.html">utils/constants</a></li><li class=" tsd-kind-module"><a href="modules/utils_helpers.html">utils/helpers</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

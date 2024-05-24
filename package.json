@@ -1,0 +1,48 @@
+{
+  "name": "snake-venom",
+  "version": "1.0.4",
+  "description": "javascript app instrumentations with opentelemetry",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "typedoc src/**/* --out docs",
+    "dev": "tsc -w",
+    "build": "tsc -p ."
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "opentelemetry",
+    "browser",
+    "tracing",
+    "profiling",
+    "metrics",
+    "stats",
+    "monitoring"
+  ],
+  "author": "sailesh.sahu",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.0.4",
+    "@opentelemetry/context-zone": "^1.2.0",
+    "@opentelemetry/core": "1.0.1",
+    "@opentelemetry/exporter-collector": "0.25.0",
+    "@opentelemetry/instrumentation": "^0.27.0",
+    "@opentelemetry/instrumentation-document-load": "^0.27.1",
+    "@opentelemetry/instrumentation-fetch": "^0.27.0",
+    "@opentelemetry/instrumentation-user-interaction": "^0.27.0",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.27.0",
+    "@opentelemetry/sdk-trace-base": "1.0.1",
+    "@opentelemetry/sdk-trace-web": "1.0.1",
+    "typedoc": "^0.22.15"
+  }
+}
